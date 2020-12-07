@@ -1,0 +1,171 @@
+CREATE TABLE Vevo(V_ID number(3) primary key, Szulido number(4), Hazszam number(4), Varos char(50), Utca char(50))
+CREATE TABLE Marka(M_ID number(3) primary key, Nev char(255), Tulaj char(255), Alap_ev number(4))
+CREATE TABLE Beszallito(B_ID number(3) primary key, Elerhetoalapanyagok char(255), Nev char(255), Adoszam number(11))
+CREATE TABLE Gyar(G_ID number(3) primary key, Hazszam number(4), Varos char(50), Utca char(50))
+CREATE TABLE Udito(U_ID number(3) primary key, Kiszereles number(1), Nev char(255), Ar number(10), Marka_id number(3), foreign key(Marka_id) references Marka(M_ID))
+CREATE TABLE Vesz(U_id number(3), foreign key(U_id) references Udito(U_ID), V_id number(3), foreign key(V_id) references Vevo(V_ID), Vett_mennyiseg number(6),Vetel_azon number(5))
+CREATE TABLE U_G(U_id number(3), foreign key(U_id) references Udito(U_ID), G_id number(3), foreign key(G_ID) references Gyar(G_ID))
+CREATE TABLE B_G(B_id number(3), foreign key(B_id) references Beszallito(B_ID), G_id number(3), foreign key(G_ID) references Gyar(G_ID))
+ 
+ 
+BEGIN
+INSERT INTO Vevo (V_ID,Szulido,Hazszam,Varos,Utca) VALUES (1,'1998',133,'Budapest','Eper');
+INSERT INTO Vevo (V_ID,Szulido,Hazszam,Varos,Utca) VALUES (2,'2005',911,'Budapest','Petőfy');
+INSERT INTO Vevo (V_ID,Szulido,Hazszam,Varos,Utca) VALUES (3,'1989',695,'Szeged','Eper');
+INSERT INTO Vevo (V_ID,Szulido,Hazszam,Varos,Utca) VALUES (4,'1964',850,'Miskolc','Damjanich');
+INSERT INTO Vevo (V_ID,Szulido,Hazszam,Varos,Utca) VALUES (5,'1997',101,'Miskolc','Kossuth');
+INSERT INTO Vevo (V_ID,Szulido,Hazszam,Varos,Utca) VALUES (6,'1957',269,'Győr','Eper');
+INSERT INTO Vevo (V_ID,Szulido,Hazszam,Varos,Utca) VALUES (7,'1998',2,'Győr','Kossuth');
+INSERT INTO Vevo (V_ID,Szulido,Hazszam,Varos,Utca) VALUES (8,'1987',805,'Budapest','Arany');
+INSERT INTO Vevo (V_ID,Szulido,Hazszam,Varos,Utca) VALUES (9,'2000',1000,'Szeged','Eper');
+INSERT INTO Vevo (V_ID,Szulido,Hazszam,Varos,Utca) VALUES (10,'1955',576,'Eger','Deák');
+INSERT INTO Vevo (V_ID,Szulido,Hazszam,Varos,Utca) VALUES (11,'1965',613,'Eger','Damjanich');
+INSERT INTO Vevo (V_ID,Szulido,Hazszam,Varos,Utca) VALUES (12,'1978',93,'Budapest','Arany');
+INSERT INTO Vevo (V_ID,Szulido,Hazszam,Varos,Utca) VALUES (13,'1965',68,'Eger','Damjanich');
+INSERT INTO Vevo (V_ID,Szulido,Hazszam,Varos,Utca) VALUES (14,'1988',410,'Eger','Petőfy');
+INSERT INTO Vevo (V_ID,Szulido,Hazszam,Varos,Utca) VALUES (15,'2001',584,'Eger','Kossuth');
+ 
+INSERT INTO Marka (M_ID,Nev,Tulaj,Alap_ev) VALUES (1,'DrPepper','Mészáros Lőrinc','1981');
+INSERT INTO Marka (M_ID,Nev,Tulaj,Alap_ev) VALUES (2,'Fanta','Mészáros Lőrinc','1989');
+INSERT INTO Marka (M_ID,Nev,Tulaj,Alap_ev) VALUES (3,'Pepsi','Mészáros Lőrinc','1979');
+INSERT INTO Marka (M_ID,Nev,Tulaj,Alap_ev) VALUES (4,'7Up','Mészáros Lőrinc','1979');
+INSERT INTO Marka (M_ID,Nev,Tulaj,Alap_ev) VALUES (5,'Coca Cola','Mészáros Lőrinc','1984');
+INSERT INTO Marka (M_ID,Nev,Tulaj,Alap_ev) VALUES (6,'Pepsi','Mészáros Lőrinc','2003');
+INSERT INTO Marka (M_ID,Nev,Tulaj,Alap_ev) VALUES (7,'Pepsi','Mészáros Lőrinc','1995');
+INSERT INTO Marka (M_ID,Nev,Tulaj,Alap_ev) VALUES (8,'Fanta','Mészáros Lőrinc','2002');
+INSERT INTO Marka (M_ID,Nev,Tulaj,Alap_ev) VALUES (9,'Pepsi','Mészáros Lőrinc','2005');
+INSERT INTO Marka (M_ID,Nev,Tulaj,Alap_ev) VALUES (10,'Sprite','Mészáros Lőrinc','1997');
+INSERT INTO Marka (M_ID,Nev,Tulaj,Alap_ev) VALUES (11,'Pepsi','Mészáros Lőrinc','1979');
+INSERT INTO Marka (M_ID,Nev,Tulaj,Alap_ev) VALUES (12,'Sprite','Mészáros Lőrinc','1992');
+INSERT INTO Marka (M_ID,Nev,Tulaj,Alap_ev) VALUES (13,'Fanta','Mészáros Lőrinc','1985');
+INSERT INTO Marka (M_ID,Nev,Tulaj,Alap_ev) VALUES (14,'DrPepper','Mészáros Lőrinc','2000');
+INSERT INTO Marka (M_ID,Nev,Tulaj,Alap_ev) VALUES (15,'Coca Cola','Mészáros Lőrinc','1985');
+ 
+INSERT INTO Beszallito (B_ID,Elerhetoalapanyagok,Nev,Adoszam) VALUES (1,'Víz','Koronás cukor',47514010378);
+INSERT INTO Beszallito (B_ID,Elerhetoalapanyagok,Nev,Adoszam) VALUES (2,'Ízfokozók','Alapanyaggyár2',42711763431);
+INSERT INTO Beszallito (B_ID,Elerhetoalapanyagok,Nev,Adoszam) VALUES (3,'Ízfokozók','Alapanyaggyár2',77814165933);
+INSERT INTO Beszallito (B_ID,Elerhetoalapanyagok,Nev,Adoszam) VALUES (4,'Cukor','Alapanyaggyár3',22799499890);
+INSERT INTO Beszallito (B_ID,Elerhetoalapanyagok,Nev,Adoszam) VALUES (5,'Cukor','Alapanyaggyár2',25029591297);
+INSERT INTO Beszallito (B_ID,Elerhetoalapanyagok,Nev,Adoszam) VALUES (6,'Ízfokozók','Koronás cukor',35536364475);
+INSERT INTO Beszallito (B_ID,Elerhetoalapanyagok,Nev,Adoszam) VALUES (7,'Koffein','Alapanyaggyár2',90133253474);
+INSERT INTO Beszallito (B_ID,Elerhetoalapanyagok,Nev,Adoszam) VALUES (8,'Koffein','Alapanyaggyár2',13358028684);
+INSERT INTO Beszallito (B_ID,Elerhetoalapanyagok,Nev,Adoszam) VALUES (9,'Ízfokozók','Koronás cukor',24840069418);
+INSERT INTO Beszallito (B_ID,Elerhetoalapanyagok,Nev,Adoszam) VALUES (10,'Víz','Alapanyaggyár3',31528622468);
+INSERT INTO Beszallito (B_ID,Elerhetoalapanyagok,Nev,Adoszam) VALUES (11,'Víz','Alapanyaggyár2',29143041968);
+INSERT INTO Beszallito (B_ID,Elerhetoalapanyagok,Nev,Adoszam) VALUES (12,'Cukor','Alapanyaggyár2',26270103428);
+INSERT INTO Beszallito (B_ID,Elerhetoalapanyagok,Nev,Adoszam) VALUES (13,'Koffein','Alapanyaggyár3',92602477323);
+INSERT INTO Beszallito (B_ID,Elerhetoalapanyagok,Nev,Adoszam) VALUES (14,'Víz','Alapanyaggyár3',58128239968);
+INSERT INTO Beszallito (B_ID,Elerhetoalapanyagok,Nev,Adoszam) VALUES (15,'Cukor','Koronás cukor',86203920498);
+ 
+ 
+INSERT INTO Gyar (G_ID,Hazszam,Varos,Utca) VALUES (1,38,'Budapest','Eper');
+INSERT INTO Gyar (G_ID,Hazszam,Varos,Utca) VALUES (2,14,'Budapest','Arany');
+INSERT INTO Gyar (G_ID,Hazszam,Varos,Utca) VALUES (3,13,'Győr','Deák');
+INSERT INTO Gyar (G_ID,Hazszam,Varos,Utca) VALUES (4,29,'Miskolc','Eper');
+INSERT INTO Gyar (G_ID,Hazszam,Varos,Utca) VALUES (5,26,'Eger','Damjanich');
+INSERT INTO Gyar (G_ID,Hazszam,Varos,Utca) VALUES (6,11,'Szeged','Kossuth');
+INSERT INTO Gyar (G_ID,Hazszam,Varos,Utca) VALUES (7,2,'Eger','Deák');
+INSERT INTO Gyar (G_ID,Hazszam,Varos,Utca) VALUES (8,18,'Szeged','Damjanich');
+INSERT INTO Gyar (G_ID,Hazszam,Varos,Utca) VALUES (9,47,'Győr','Damjanich');
+INSERT INTO Gyar (G_ID,Hazszam,Varos,Utca) VALUES (10,12,'Szeged','Kossuth');
+INSERT INTO Gyar (G_ID,Hazszam,Varos,Utca) VALUES (11,18,'Miskolc','Arany');
+INSERT INTO Gyar (G_ID,Hazszam,Varos,Utca) VALUES (12,25,'Budapest','Kossuth');
+INSERT INTO Gyar (G_ID,Hazszam,Varos,Utca) VALUES (13,34,'Győr','Deák');
+INSERT INTO Gyar (G_ID,Hazszam,Varos,Utca) VALUES (14,5,'Miskolc','Kossuth');
+INSERT INTO Gyar (G_ID,Hazszam,Varos,Utca) VALUES (15,16,'Győr','Deák');
+ 
+INSERT INTO Udito (U_ID,Kiszereles,Nev,Ar,Marka_id) VALUES (1,'1.25','Sprite',543,9);
+INSERT INTO Udito (U_ID,Kiszereles,Nev,Ar,Marka_id) VALUES (2,'1.25','Cola',816,2);
+INSERT INTO Udito (U_ID,Kiszereles,Nev,Ar,Marka_id) VALUES (3,'1.25','Fanta',688,5);
+INSERT INTO Udito (U_ID,Kiszereles,Nev,Ar,Marka_id) VALUES (4,'2','Sprite',1222,15);
+INSERT INTO Udito (U_ID,Kiszereles,Nev,Ar,Marka_id) VALUES (5,'1.75','Sprite',1336,9);
+INSERT INTO Udito (U_ID,Kiszereles,Nev,Ar,Marka_id) VALUES (6,'0.5','Cola',628,7);
+INSERT INTO Udito (U_ID,Kiszereles,Nev,Ar,Marka_id) VALUES (7,'1.25','Cola',1601,10);
+INSERT INTO Udito (U_ID,Kiszereles,Nev,Ar,Marka_id) VALUES (8,'1.5','Fanta',1614,2);
+INSERT INTO Udito (U_ID,Kiszereles,Nev,Ar,Marka_id) VALUES (9,'1.25','Fanta',1121,12);
+INSERT INTO Udito (U_ID,Kiszereles,Nev,Ar,Marka_id) VALUES (10,'1.25','Cola',1903,10);
+INSERT INTO Udito (U_ID,Kiszereles,Nev,Ar,Marka_id) VALUES (11,'1.75','7Up',1534,8);
+INSERT INTO Udito (U_ID,Kiszereles,Nev,Ar,Marka_id) VALUES (12,'1.5','Cola',1296,11);
+INSERT INTO Udito (U_ID,Kiszereles,Nev,Ar,Marka_id) VALUES (13,'1','Fanta',870,11);
+INSERT INTO Udito (U_ID,Kiszereles,Nev,Ar,Marka_id) VALUES (14,'0.25','Sprite',1771,5);
+INSERT INTO Udito (U_ID,Kiszereles,Nev,Ar,Marka_id) VALUES (15,'1.75','Cola',645,5);
+ 
+INSERT INTO Vesz (U_id,V_id,Vett_mennyiseg,Vetel_azon) VALUES (11,13,66,24394);
+INSERT INTO Vesz (U_id,V_id,Vett_mennyiseg,Vetel_azon) VALUES (6,8,83,86534);
+INSERT INTO Vesz (U_id,V_id,Vett_mennyiseg,Vetel_azon) VALUES (14,5,93,19781);
+INSERT INTO Vesz (U_id,V_id,Vett_mennyiseg,Vetel_azon) VALUES (8,6,13,42957);
+INSERT INTO Vesz (U_id,V_id,Vett_mennyiseg,Vetel_azon) VALUES (10,9,1,13832);
+INSERT INTO Vesz (U_id,V_id,Vett_mennyiseg,Vetel_azon) VALUES (1,8,10,74835);
+INSERT INTO Vesz (U_id,V_id,Vett_mennyiseg,Vetel_azon) VALUES (12,2,42,20884);
+INSERT INTO Vesz (U_id,V_id,Vett_mennyiseg,Vetel_azon) VALUES (15,3,89,80531);
+INSERT INTO Vesz (U_id,V_id,Vett_mennyiseg,Vetel_azon) VALUES (10,8,51,67030);
+INSERT INTO Vesz (U_id,V_id,Vett_mennyiseg,Vetel_azon) VALUES (5,5,59,69997);
+INSERT INTO Vesz (U_id,V_id,Vett_mennyiseg,Vetel_azon) VALUES (6,2,55,84474);
+INSERT INTO Vesz (U_id,V_id,Vett_mennyiseg,Vetel_azon) VALUES (11,7,43,68454);
+INSERT INTO Vesz (U_id,V_id,Vett_mennyiseg,Vetel_azon) VALUES (5,3,30,67663);
+INSERT INTO Vesz (U_id,V_id,Vett_mennyiseg,Vetel_azon) VALUES (1,9,17,71577);
+INSERT INTO Vesz (U_id,V_id,Vett_mennyiseg,Vetel_azon) VALUES (9,9,1,87688);
+ 
+INSERT INTO U_G (U_id,G_id) VALUES (12,10);
+INSERT INTO U_G (U_id,G_id) VALUES (5,12);
+INSERT INTO U_G (U_id,G_id) VALUES (10,13);
+INSERT INTO U_G (U_id,G_id) VALUES (3,13);
+INSERT INTO U_G (U_id,G_id) VALUES (1,7);
+INSERT INTO U_G (U_id,G_id) VALUES (4,1);
+INSERT INTO U_G (U_id,G_id) VALUES (2,9);
+INSERT INTO U_G (U_id,G_id) VALUES (12,12);
+INSERT INTO U_G (U_id,G_id) VALUES (9,15);
+INSERT INTO U_G (U_id,G_id) VALUES (6,15);
+INSERT INTO U_G (U_id,G_id) VALUES (5,12);
+INSERT INTO U_G (U_id,G_id) VALUES (13,15);
+INSERT INTO U_G (U_id,G_id) VALUES (11,3);
+INSERT INTO U_G (U_id,G_id) VALUES (10,1);
+INSERT INTO U_G (U_id,G_id) VALUES (10,7);
+ 
+INSERT INTO B_G (B_id,G_id) VALUES (12,6);
+INSERT INTO B_G (B_id,G_id) VALUES (7,9);
+INSERT INTO B_G (B_id,G_id) VALUES (3,2);
+INSERT INTO B_G (B_id,G_id) VALUES (6,8);
+INSERT INTO B_G (B_id,G_id) VALUES (8,6);
+INSERT INTO B_G (B_id,G_id) VALUES (15,1);
+INSERT INTO B_G (B_id,G_id) VALUES (9,9);
+INSERT INTO B_G (B_id,G_id) VALUES (2,4);
+INSERT INTO B_G (B_id,G_id) VALUES (15,8);
+INSERT INTO B_G (B_id,G_id) VALUES (2,15);
+INSERT INTO B_G (B_id,G_id) VALUES (14,11);
+INSERT INTO B_G (B_id,G_id) VALUES (6,12);
+INSERT INTO B_G (B_id,G_id) VALUES (15,5);
+INSERT INTO B_G (B_id,G_id) VALUES (5,3);
+INSERT INTO B_G (B_id,G_id) VALUES (2,3);
+END
+ 
+ 
+ 
+ 
+Minden az üdítők táblából:
+SELECT * FROM Udito;
+ 
+1200 Feletti árú üdítők neve és ára:
+SELECT Nev, Ar FROM Udito WHERE Ar < 1200;
+ 
+Számolt adattag, Kor:
+SELECT V_ID, (SELECT to_char(sysdate, 'YYYY') FROM dual) - (Szulido) AS Kor FROM Vevo;
+ 
+Beszállító neve Gyár azonosítója üdítő neve és ára:
+SELECT Beszallito.Nev, Gyar.G_ID, Udito.Nev, Udito.Ar 
+FROM Beszallito 
+JOIN B_G ON Beszallito.B_ID = B_G.B_id 
+JOIN Gyar ON B_G.G_id = Gyar.G_ID 
+JOIN U_G ON Gyar.G_ID = U_G.G_id 
+JOIN Udito ON U_G.U_id = Udito.U_ID;
+ 
+Üdítő tipusonkét csoportosítva az összáruk:
+SELECT Nev, SUM(Ar) AS Összár FROM Udito GROUP BY Nev;
+ 
+Egerbe gyártott üdítők listája:
+SELECT Udito.Nev FROM Udito FULL OUTER JOIN U_G ON Udito.U_ID = U_G.U_id INNER JOIN Gyar ON U_G.G_id = Gyar.G_ID WHERE Varos = 'Eger';
+ 
+ 
+ 
+
+
