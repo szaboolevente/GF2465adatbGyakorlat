@@ -1,0 +1,72 @@
+6.1
+
+1;
+Π tkod, nev ( ნ kategoria = X (termek) )
+2;
+Π t.nev, gy.nev ( termek t ⋈ t.gyarto = gy.adoszam gyarto gy)
+3;
+Π gy.nev ( ნ kategoria = X (termek) t ⋈ t.gyarto = gy.adoszam gyarto gy)
+4;
+Γ count(*) ( ნ ear > Y (termek))
+5;
+Γ count(*) ( gyarto gy ⋉ t.gyarto = gy.adoszam ნ ear > Y (termek) t )
+
+
+6.2
+
+1;
+Γ kategoria kategoria, avg(ear)) ( (termek))
+2;
+Γ termek termek, count(*) ( komponens)
+3;
+Γ t.nev t.nev, count(*) ( komponens k ⋈ t.tkod = k.termek termek t)
+4;
+Π.a.* ( ნ nev= X (termek) t ⋈ t.tkod = k.termek komponens k ⋈ a.akod= k.alkatresz alkatresz a)
+5;
+Π kategoria ( ნ av > X (Γ kategoria kategoria, avg(ar) av ( (termek)))
+
+
+6.3
+
+1;
+Γ sum(befizetes), sum(Eur) ( ε befizetes/370 Eur (befizetes))
+2;
+Γr..tajszam max(r.nev),sum(b.befizetes) (befizetes b ⋈ b.diak= r.tajszam resztvevo r)
+3;
+Γt.tkod max(r.megnevezes),count(*) (befizetes b ⋈ b.kurzus= t.tkod tanfolyam t)
+4;
+Γt.tkod max(r.megnevezes),count(b.kurzus) (befizetes b ⋈ + b.kurzus= t.tkod tanfolyam t)
+5;
+Π megnevezes ( ნ tkod not ∊ (Π {kurzus} (befizetes)) (tanfolyam))
+6;
+Π megnevezes ( ნ db = ( Γ {max(db)} (X) ) (X) )
+
+
+6.4
+
+1;
+INSERT INTO termekek VALUES (11,’bab’,2000,’Z’);
+
+2;
+DELETE FROM termekek
+ WHERE ear < X;
+
+3;
+UPDATE termekek 
+SET ear = ear*.9 
+WHERE kategoria = Y;
+
+
+6.5
+
+1;
+ALTER TABLE termekek 
+ADD (szin CHAR(20));
+
+2;
+DROP TABLE termekek;
+
+3;
+DELETE FROM termekek 
+WHERE kategoria IS NULL;
+
