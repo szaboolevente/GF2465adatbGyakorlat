@@ -1,0 +1,133 @@
+7.1
+
+1;
+SELECT * 
+FROM termek 
+WHERE ear > X;
+
+2;
+SELECT nev, adoszam 
+FROM gyarto 
+WHERE telephely = ‘X’;
+
+3;
+SELECT COUNT(*) 
+FROM termek 
+WHERE ear > X;
+
+4;
+SELECT tkod 
+FROM termek 
+WHERE nev LIKE ‘%tej%’;
+
+5;
+SELECT nev 
+FROM gyarto 
+WHERE telephely IS NULL;
+
+
+7.2
+
+1;
+SELECT t.nev, gy,nev 
+FROM termek t 
+INNER JOIN gyarto gy ON t.gyarto = gy.adoszam;
+
+2;
+SELECT t.nev, t.ear 
+FROM termek t 
+INNER JOIN gyarto gy ON t.gyarto = gy.adoszam
+ WHERE gy.nev = ‘X’;
+
+3;
+SELECT a.nev 
+FROM termek t 
+INNER JOIN komponens k ON t.tkod = k.termek 
+INNER JOIN alkatresz a ON k.alkatresz = a.akod 
+WHERE t.nev = ‘X’;
+
+4;
+SELECT nev, tkod 
+FROM termek
+WHERE tkod NOT IN (SELECT termek FROM komponens);
+
+
+7.3
+
+1;
+SELECT tipus, COUNT(*) db 
+FROM tanfolyam 
+GROUP BY tipus;
+
+2;
+SELECT kurzus, COUNT(*) db 
+FROM befizetes 
+GROUP BY kurzus;
+
+3;
+SELECT t.nev, COUNT(*) db 
+FROM befizetes b
+ INNER JOIN tanfolyam t ON b.kurzus = t.tkod;
+
+4;
+SELECT t.nev, COUNT(*) db 
+FROM befizetes b 
+INNER JOIN tanfolyam t ON b.kurzus = t.tkod 
+WHERE b.befizetes = t.ar;
+
+5;
+SELECT r.lakcim, COUNT(*) db 
+FROM befizetes b
+INNER JOIN resztvevo r ON b.diak = r.tajszam 
+WHERE b.kurzus IN (SELECT tkod FROM tanfolyam;
+
+
+7.4
+
+1;
+SELECT COUNT(*) 
+FROM termek 
+WHERE ear > (SELECT avg(ear) FROM termek);
+
+2;
+SELECT nev
+FROM termek 
+WHERE ear = (SELECT max(ear) FROM termek);
+
+3;
+SELECT nev 
+FROM gyarto 
+WHERE adoszam IN (SELECT gyarto FROM termek WHERE ear = (SELECT max(ear) FROM termek));
+
+4;
+SELECT nev
+ FROM gyatlag 
+WHERE mear = (SELECT max(mear) FROM gyatlag);
+
+5;
+SELECT gy.nev, AVG (t.ear) aear 
+FROM gyarto gy 
+LEFT OUTER JOIN termek t ON gy.adoszam = t.gyarto
+GROUP BY gy,nev;
+
+
+7.5
+
+1;
+GRANT SELECT ON termekek TO peter
+
+2;
+SELECT * 
+FROM zoli.termekek;
+
+3;
+CREATE VIEW tnevek AS SELECT nev 
+FROM termekek
+
+4;
+CREATE VIEW tnevek AS SELECT nev 
+FROM termekek
+
+5;
+SELECT * 
+FROM zoli.tnevek
