@@ -1,0 +1,112 @@
+9.1
+
+1;
+SELECT *
+FROM termek
+WHERE ear > X;
+σear>X(TERMEK)
+
+2;
+SELECT adoszam, nev
+FROM gyarto
+WHERE telephely = ’X’;
+πadoszam,nev(σtelephely=’x’(GYARTO))
+
+3;
+SELECT count(*)
+FROM termek
+WHERE ear > X;
+πcount(*)(σear>X(TERMEK))
+
+4;
+SELECT tkod
+FROM termek
+WHERE nev LIKE ’%tej%’;
+πtkod(σnev LIKE ’%tej%’(TERMEK))
+
+5;
+SELECT nev
+FROM gyarto
+WHERE telephely IS NULL;
+ πnev(σtelephely IS NULL(GYARTO))
+
+
+9.2
+
+1;
+SELECT gyarto.nev, termek.nev
+FROM termek
+JOIN gyarto on gyarto.nev = termek.gyarto;
+
+2;
+SELECT termek.nev, termek.ear
+FROM termek
+JOIN gyarto on gyarto.nev = termek.gyarto
+WHERE gyarto.nev = ’x’;
+
+3;
+SELECT alkatresz.nev
+FROM komponens
+JOIN alkatresz on alkatresz.akod = komponens.alkatresz
+JOIN termek on komponens.termek = termek.nev;
+
+4;
+SELECT termek.nev
+FROM termek
+FULL JOIN komponens on komponens.termek = termek.nev
+WHERE komponens.alkatresz IS NULL;
+
+
+9.3
+
+1;
+SELECT count(tipus)
+FROM tanfolyam
+GROUP BY tipus;
+
+2;
+SELECT count(befizetes.kurzus), tanfolyam.tkod
+FROM tanfolyam
+JOIN befizetes on tanfolyam.tkod = befizetes.kurzus;
+GROUP BY tanfolyam.tkod;
+
+3;
+SELECT count(befizetes.kurzus), tanfolyam.megnevezes
+FROM tanfolyam
+JOIN befizetes on tanfolyam.tkod = befizetes.kurzus;
+GROUP BY tanfolyam.megnevezes;
+
+4;
+SELECT count(befizetes.kurzus), tanfolyam.tkod
+FROM tanfolyam
+JOIN befizetes on tanfolyam.tkod = befizetes.kurzus
+HAVING tanfolyam.ar = befizetes.befizetes
+GROUP BY tanfolyam.tkod;
+5;
+SELECT count(resztvevo.lakcim)
+FROM befizetes
+JOIN tanfolyam on befizetes.kurzus = tanfolyam.tkod
+JOIN resztvevo on befizetes.diak = resztvevo.tajszam
+WHERE tanfolyam.megnevezes = ’X’
+HAVING resztvevo.lakcim IS NOT NULL
+GROUP BY tanfolyam.tkod;
+
+
+9.5
+
+1;
+GRANT SELECT 
+ON zoli.termekek
+TO peter;
+
+2;
+zoli.termekek
+
+3;
+GRANT SELECT 
+ON ZOLI.termekek
+TO public;
+
+4;
+SELECT nev
+FROM zoli.termekek;
