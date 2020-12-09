@@ -1,0 +1,41 @@
+8.1
+
+CREATE TABLE gyarto (adoszam INT PRIMARY KEY,
+nev VARCHAR2(30) NOT NULL, varos VARCHAR2(200));
+
+CREATE TABLE termek (tkod INT PRIMARY KEY,
+nev VARCHAR2(50) NOT NULL, ear INT CHECK (EAR > 0),
+kategória CHAR(10), gyarto INT REFERENCES GYARTO);
+
+- az X kategóriájú termékek neve és kódja: π nev tkod (σkategoria=’x’ (AUTO))
+
+- a termékek neve és a gyártó neve együtt: termek+⋈ adoszam-tkod+gyarto (π nev (TERMEK) πnev (GYARTO))
+
+- az X kategóriájú termékek gyártóinak nevei: πnev (GYARTO) (σkategoria=’x’ (AUTO))
+
+- az Y-nál drágább termékek darabszáma: Гcount (TERMEK) ((σar>x ) TERMEK)
+
+- az Y-nál drágább termékek gyártóinak darabszáma: Гcount (GYATO) ((σar>x ) TERMEK)
+
+
+8.4
+
+- új rekord felvitele: INSERT termekek (tkod, nev, ear, kategoria);
+VALUES (123, x, z, a);
+
+- az X-nél olcsóbb termékek törlése: DELETE FROM termekek WHERE ear < x;
+
+- az Y kategóriájú termékek árának csökkentése 10%-kal: UPDATE myTable; 
+SET ear = ear * 0,9;
+
+
+8.5
+
+- új rekord felvitele: INSERT termekek (tkod, nev, ear, kategoria);
+VALUES (123, x, z, a);
+
+- az X-nél olcsóbb termékek törlése: DELETE FROM termekek WHERE ear < x;
+
+- az Y kategóriájú termékek árának csökkentése 10%-kal: UPDATE myTable; 
+SET ear = ear * 0,9;
+
