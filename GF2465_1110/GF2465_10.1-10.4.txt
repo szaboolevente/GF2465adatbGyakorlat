@@ -1,0 +1,80 @@
+10.1
+
+1;
+ALTER TABLE alkatresz
+ADD ar varchar2(255);
+
+2;
+SELECT gyarto.nev
+FROM gyarto
+FULL JOIN termek on termek.gyarto = gyarto.nev
+WHERE termek.gyarto IS NULL;
+
+
+3;
+UPDATE Alkatresz
+SET akod=akod*1,10 
+WHERE akod=x;
+
+4;
+SELECT TOP 1 termek.tkod
+from termek
+FULL JOIN egysegek on egysegek.aru = termek.tkod
+ORDER BY egysegek.db DESC;
+
+
+10.2
+
+1;
+SELECT AVG(ar) as ’atlagar’, tipus, MAX(ar) – MIN(ar) as ’ertektartomany’
+FROM tanfolyam
+GROUP BY tipus;
+
+2;
+SELECT megnevezes, IF(ar> 100000, „Draga”, „Olcso”)
+FROM tanfolyam;
+
+3;
+SELECT tanfolyam.megnevezes, IF(COUNT(resztvevo.tajszam)>10, „SOK”, „KEVES”)
+from tanfolyam
+JOIN  befizetes on befizetes.kurzus = tanfolyam.tkod
+JOIN resztvevo on resztvevo.tajszam = befizetes.diak
+GROUP BY tanfolyam.megnevezes;
+
+10.3
+
+1;
+SELECT AVG(ar) as ’atlagar’, tipus, MAX(ar) – MIN(ar) as ’ertektartomany’
+FROM tanfolyam
+GROUP BY tipus;
+
+2;
+SELECT megnevezes, IF(ar> 100000, „Draga”, „Olcso”)
+FROM tanfolyam;
+
+3;
+SELECT tanfolyam.megnevezes, IF(COUNT(resztvevo.tajszam)>10, „SOK”, „KEVES”)
+from tanfolyam
+JOIN  befizetes on befizetes.kurzus = tanfolyam.tkod
+JOIN resztvevo on resztvevo.tajszam = befizetes.diak
+GROUP BY tanfolyam.megnevezes;
+
+
+10.4
+
+1;
+ALTER TABLE termek 
+ADD (kategoria CHAR(50));
+2;
+CREATE VIEW kgy AS SELECT g.adoszam, t.kategoria 
+FROM gyarto g 
+LEFT OUTER JOIN termek t ON g.adoszam = t.gyarto
+GROUP BY g.adoszam, t.kategoria ;
+
+CREATE VIEW kgy2 AS SELECT kategoria, COUNT(adoszam) db
+FROM kgy 
+GROUP BY kategoria;
+
+SELECT kategoria 
+FROM kgy2 
+WHERE db = (SELECT COUNT(*) FROM gyarto);
